@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $query = "SELECT imagen FROM propiedades WHERE IdPropiedad = ${id}";
         $resultado = mysqli_query($db, $query);
         $propiedad = mysqli_fetch_assoc($resultado);
-        unlink('../imagenes/' . $propiedad['imagen']);
+        unlink('imagenes/' . $propiedad['imagen']);
 
 
         //eliminar propiedad
