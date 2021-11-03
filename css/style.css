@@ -305,6 +305,13 @@ a {
   width: 100%;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: 90% 10%;
+  gap: 1rem;
+  align-items: center;
+}
+
 /* css para ocultar tanto los lebal y los input  Inicio del las ids luis A  */
 #RFCvent {
   display: none;
@@ -648,6 +655,14 @@ header {
 .contenedor-anuncio .img-anuncio {
   width: 80%;
   height: 70%;
+}
+.icono-favoritos {
+  width: 40px;
+  height: 40px;
+  margin-top: 2rem;
+}
+.icono-favoritos:hover {
+  background-color: var(--second-color);
 }
 
 .contenedor-anuncio .info-anuncio h3 {

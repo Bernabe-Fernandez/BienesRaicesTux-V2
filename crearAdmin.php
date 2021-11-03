@@ -13,9 +13,6 @@
 
     //autenticar el usuario
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        // echo "<pre>";
-        // var_dump($_POST);
-        // echo "</pre>";
 
         //agregamos filtro para validar email
         $user = mysqli_real_escape_string($db, $_POST['nombre']);
