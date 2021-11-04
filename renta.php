@@ -13,7 +13,7 @@ incluirTemplate('header');
 <section class="contenedor">
     <div class="catalago-home">
         <h2>
-            Casas y Departamentos Destacados
+            Casas y Departamentos en Renta
         </h2>
         <div class="catalago-home-container">
             <!-- tarjeta de la casa publicada -->

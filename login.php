@@ -5,7 +5,6 @@
     $db = conectarDB();
 
     $errores = [];
-
     //autenticar el usuario
     if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["option"] == '1') {
         //agregamos filtro para validar email

@@ -14,7 +14,7 @@ incluirTemplate('header');
 <section class="contenedor">
     <div class="catalago-home">
         <h2>
-            Casas y Departamentos en venta
+            Casas y Departamentos en Venta
         </h2>
         <div class="catalago-home-container">
             <!-- tarjeta de la casa publicada -->
