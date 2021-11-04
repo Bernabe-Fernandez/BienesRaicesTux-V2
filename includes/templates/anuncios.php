@@ -15,7 +15,7 @@
     ?>
 
         <div class="anuncio">
-            <img loading="lazy" src="imagenes/<?php echo $propiedad['imagen']; ?>" alt="descatada 1" class="img-anuncio">
+            <img loading="lazy" src="imagenes/<?php echo $propiedad['imagen']; ?>" alt="propiedad" class="img-anuncio">
             <div class="info-anuncio">
                 <h3><?php echo $propiedad['nombrePropiedad']; ?></h3>
                 <p class="descripcion">
