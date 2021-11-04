@@ -7,11 +7,7 @@
     $errores = [];
 
     //autenticar el usuario
-    if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        // echo "<pre>";
-        // var_dump($_POST);
-        // echo "</pre>";
-
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["option"] == '1') {
         //agregamos filtro para validar email
         $email = mysqli_real_escape_string($db, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
         $password = mysqli_real_escape_string($db, $_POST['password']);
@@ -27,7 +23,7 @@
         if (empty($errores)) {
 
             //revisar si el usuario existe
-            $query = "SELECT correoElectronico, contraseña FROM vendedores WHERE correoElectronico = '${email}'";
+            $query = "SELECT IdVendedores, correoElectronico, contraseña FROM vendedores WHERE correoElectronico = '${email}'";
             $resultado = mysqli_query($db, $query);
             // var_dump($query);
 
@@ -43,6 +39,51 @@
 
                     //llenar el arreglo de la sesion
                     $_SESSION['usuario'] = $usuario['correoElectronico'];
+                    $_SESSION['Idusuario'] = $usuario['IdVendedores'];
+                    $_SESSION['login'] = true;
+
+                    //regresar al index
+                    header('Location: index.php');
+                } else {
+                    $errores[] = "Contraseña Incorrecta";
+                }
+            } else {
+                $errores[] = "El Usuario no existe";
+            }
+        }
+    } elseif (($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["option"] == '2')) {
+        //agregamos filtro para validar email
+        $email = mysqli_real_escape_string($db, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
+        $password = mysqli_real_escape_string($db, $_POST['password']);
+
+        if (!$email) {
+            $errores[] = "El Email es obligatorio o  no es valido";
+        }
+
+        if (!$password) {
+            $errores[] = "El Password es obligatorio";
+        }
+
+        if (empty($errores)) {
+
+            //revisar si el usuario existe
+            $query = "SELECT idCompradores, correoElectronico, contraseña FROM compradores WHERE correoElectronico = '${email}'";
+            $resultado = mysqli_query($db, $query);
+            // var_dump($query);
+
+            //comprobacion para usuarios
+            if ($resultado->num_rows) {
+                //revisar si el password es correcto
+                $usuario = mysqli_fetch_assoc($resultado);
+                //verificar si el usuario es correcto
+                $auth = password_verify($password, $usuario['contraseña']);
+                if ($auth) {
+                    //el usuario ha sido autenticado
+                    session_start();
+
+                    //llenar el arreglo de la sesion
+                    $_SESSION['usuario'] = $usuario['correoElectronico'];
+                    $_SESSION['Idusuario'] = $usuario['idCompradores'];
                     $_SESSION['login'] = true;
 
                     //regresar al index
@@ -82,7 +123,7 @@
                 <div class="grupo">
                     <input type="password" name="password" id="password" required>
                     <spam class="barra"></spam>
-                    <label for="">password</label>
+                    <label for="">Password</label>
                     <div class="contenedor-password">
                         <div class="icono-password toggle" onclick="mostrar()">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#9e9e9e" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -92,6 +133,12 @@
                             </svg>
                         </div>
                     </div>
+                </div>
+                <div class="type-user">
+                    <label for="vendedor">Vendedor</label>
+                    <input type="radio" id="vendedor" name="option" value="1">
+                    <label for="comprador">Comprador</label>
+                    <input type="radio" id="comprador" name="option" value="2">
                 </div>
 
                 <!-- Boton de el formulario del login  -->

@@ -40,8 +40,6 @@
             //query para insertar el usuario
             $query = "INSERT INTO administradores (nombre, correoElectronico, contrasena) VALUES ('$user', '$email', '$passwordHash')";
             $resultado = mysqli_query($db, $query);
-            // var_dump($query);
-            // exit;
 
             if ($resultado) {
                 //REDICCIONAR AL USUARIO

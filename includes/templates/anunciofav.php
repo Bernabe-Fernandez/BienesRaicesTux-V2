@@ -1,18 +1,18 @@
-    <?php
-    //importar la base de datos
-    require 'includes/config/database.php';
-    $db = conectarDB();
+<?php
+//importar la base de datos
+require 'includes/config/database.php';
+$db = conectarDB();
+//consultar
+$query = "SELECT idFavoritos, idUsuario, idProducto FROM favoritos WHERE idUsuario = ${idUser}";
 
-    //consultar
-    $query = "SELECT * FROM propiedades LIMIT ${limite}";
+//obtener los resultados
+$resultado = mysqli_query($db, $query);
 
-
-    //obtener los resultados
-    $resultado = mysqli_query($db, $query);
-
-
-    while ($propiedad = mysqli_fetch_assoc($resultado)) :
-    ?>
+while ($favorito = mysqli_fetch_array($resultado)) :
+    $consulta = "SELECT * FROM propiedades WHERE idPropiedad = ${favorito["idProducto"]}";
+    $execute = mysqli_query($db, $consulta);
+    while ($propiedad = mysqli_fetch_assoc($execute)) :
+?>
 
         <div class="anuncio">
             <img loading="lazy" src="imagenes/<?php echo $propiedad['imagen']; ?>" alt="descatada 1" class="img-anuncio">
@@ -59,15 +59,16 @@
                 <a href="anuncios.php?id=<?php echo $propiedad['IdPropiedad']; ?>" class="btn-azul-block">
                     Más Información
                 </a>
-                <a href="includes/templates/favorito.php?id=<?php echo $propiedad['IdPropiedad']; ?>&ocupacion=<?php echo $propiedad['ocupacion']; ?>">
-                    <img src="img/corazon.svg" alt="icono-antiguedad" class="icono-favoritos">
+                <a href="includes/templates/deletefav.php?id=<?php echo $favorito["idFavoritos"]; ?>">
+                    <img src="img/ban.svg" alt="icono-antiguedad" class="icono-favoritos">
                 </a>
             </div>
         </div>
-    <?php
+<?php
     endwhile;
-    //cerrar la conexion
+endwhile;
+//cerrar la conexion
 
-    mysqli_close($db);
+mysqli_close($db);
 
-    ?>
+?>
