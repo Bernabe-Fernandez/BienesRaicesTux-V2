@@ -31,11 +31,6 @@
     //ejecutar el codigo despues de que el usuario envia el formulario
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-        // // la super global file, nos muestra informacion de archivos enviados mediante un formulario
-        // echo "<pre>";
-        // var_dump($_FILES);
-        // echo "<pre>";
-
         $nombrePropiedad = $_POST['nombrePropiedad'];
         $ocupacion = $_POST['ocupacion'];
         $tipoInmueble = $_POST['tipoInmueble'];

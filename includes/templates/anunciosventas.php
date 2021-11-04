@@ -67,7 +67,6 @@ while ($propiedad = mysqli_fetch_assoc($resultado)) :
 <?php
 endwhile;
 //cerrar la conexion
-
 mysqli_close($db);
 
 ?>

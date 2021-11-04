@@ -21,10 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $id = $_GET['id'];
     $id = filter_var($id, FILTER_VALIDATE_INT);
-    // $auth = estaAutenticado();
-    // if (!$auth) {
-    //     header('Location: index.php');
-    // }
 
     if ($id) {
 

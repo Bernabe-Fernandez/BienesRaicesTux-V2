@@ -67,7 +67,6 @@
     <?php
     endwhile;
     //cerrar la conexion
-
     mysqli_close($db);
 
     ?>
