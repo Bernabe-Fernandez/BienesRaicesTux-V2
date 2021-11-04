@@ -77,7 +77,7 @@
                             <?php echo $propiedad['nombrePropiedad']; ?>
                         </td>
                         <td>
-                            <img src="imagenes/<?php echo $propiedad['imagen']; ?>" alt="Casa Playa" class="imagen-tabla">
+                            <img src="imagenes/<?php echo $propiedad['imagen']; ?>" alt="propiedad" class="imagen-tabla">
                         </td>
                         <td>$<?php echo $propiedad['precio']; ?>.00</td>
                         <td>
