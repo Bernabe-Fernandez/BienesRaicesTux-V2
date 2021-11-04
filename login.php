@@ -4,25 +4,30 @@
     require 'includes/config/database.php';
     $db = conectarDB();
 
+    $_POST['option'] = "";
+
     $errores = [];
     //autenticar el usuario
     if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["option"] == '1') {
         //agregamos filtro para validar email
         $email = mysqli_real_escape_string($db, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
         $password = mysqli_real_escape_string($db, $_POST['password']);
+        $username = mysqli_real_escape_string($db, $_POST['name']);
 
         if (!$email) {
             $errores[] = "El Email es obligatorio o  no es valido";
         }
-
         if (!$password) {
             $errores[] = "El Password es obligatorio";
+        }
+        if (!$username) {
+            $errores[] = "El Nombre de usuario es obligatorio";
         }
 
         if (empty($errores)) {
 
             //revisar si el usuario existe
-            $query = "SELECT IdVendedores, correoElectronico, contraseña FROM vendedores WHERE correoElectronico = '${email}'";
+            $query = "SELECT IdVendedores, nameUser, correoElectronico, contraseña FROM vendedores WHERE correoElectronico = '${email}'";
             $resultado = mysqli_query($db, $query);
             // var_dump($query);
 
@@ -31,42 +36,48 @@
                 //revisar si el password es correcto
                 $usuario = mysqli_fetch_assoc($resultado);
                 //verificar si el usuario es correcto
-                $auth = password_verify($password, $usuario['contraseña']);
-                if ($auth) {
-                    //el usuario ha sido autenticado
-                    session_start();
+                if ($usuario['nameUser'] == $username) {
+                    $auth = password_verify($password, $usuario['contraseña']);
+                    if ($auth) {
+                        //el usuario ha sido autenticado
+                        session_start();
 
-                    //llenar el arreglo de la sesion
-                    $_SESSION['usuario'] = $usuario['correoElectronico'];
-                    $_SESSION['Idusuario'] = $usuario['IdVendedores'];
-                    $_SESSION['login'] = true;
+                        //llenar el arreglo de la sesion
+                        $_SESSION['usuario'] = $usuario['correoElectronico'];
+                        $_SESSION['Idusuario'] = $usuario['IdVendedores'];
+                        $_SESSION['login'] = true;
 
-                    //regresar al index
-                    header('Location: index.php');
+                        //regresar al index
+                        header('Location: index.php');
+                    } else {
+                        $errores[] = "Contraseña Incorrecta";
+                    }
                 } else {
-                    $errores[] = "Contraseña Incorrecta";
+                    $errores[] = "El usuario no coincide";
                 }
             } else {
-                $errores[] = "El Usuario no existe";
+                $errores[] = "El Correo Electronico no es Correcto";
             }
         }
     } elseif (($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["option"] == '2')) {
         //agregamos filtro para validar email
         $email = mysqli_real_escape_string($db, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
         $password = mysqli_real_escape_string($db, $_POST['password']);
+        $username = mysqli_real_escape_string($db, $_POST['name']);
 
         if (!$email) {
             $errores[] = "El Email es obligatorio o  no es valido";
         }
-
         if (!$password) {
             $errores[] = "El Password es obligatorio";
         }
+        if (!$username) {
+            $errores[] = "El Nombre de usuario es obligatorio";
+        }
 
         if (empty($errores)) {
-
             //revisar si el usuario existe
-            $query = "SELECT idCompradores, correoElectronico, contraseña FROM compradores WHERE correoElectronico = '${email}'";
+            $query = "SELECT idCompradores, nameUser, correoElectronico, contraseña FROM compradores WHERE correoElectronico = '${email}'";
             $resultado = mysqli_query($db, $query);
             // var_dump($query);
 
@@ -75,25 +86,31 @@
                 //revisar si el password es correcto
                 $usuario = mysqli_fetch_assoc($resultado);
                 //verificar si el usuario es correcto
-                $auth = password_verify($password, $usuario['contraseña']);
-                if ($auth) {
-                    //el usuario ha sido autenticado
-                    session_start();
+                if ($usuario['nameUser'] == $username) {
+                    $auth = password_verify($password, $usuario['contraseña']);
+                    if ($auth) {
+                        //el usuario ha sido autenticado
+                        session_start();
 
-                    //llenar el arreglo de la sesion
-                    $_SESSION['usuario'] = $usuario['correoElectronico'];
-                    $_SESSION['Idusuario'] = $usuario['idCompradores'];
-                    $_SESSION['login'] = true;
+                        //llenar el arreglo de la sesion
+                        $_SESSION['usuario'] = $usuario['correoElectronico'];
+                        $_SESSION['Idusuario'] = $usuario['idCompradores'];
+                        $_SESSION['login'] = true;
 
-                    //regresar al index
-                    header('Location: index.php');
+                        //regresar al index
+                        header('Location: index.php');
+                    } else {
+                        $errores[] = "Contraseña Incorrecta";
+                    }
                 } else {
-                    $errores[] = "Contraseña Incorrecta";
+                    $errores[] = "El usuario no coincide";
                 }
             } else {
-                $errores[] = "El Usuario no existe";
+                $errores[] = "El Correo Electronico no es Correcto";
             }
         }
+    } else {
+        $errores[] = "Seleccione si es Comprador o Vendedor";
     }
     incluirTemplate('header');
     ?>
@@ -108,13 +125,13 @@
         <form action="" method="POST" class="form">
             <div class="forma">
                 <div class="grupo">
-                    <input type="text" id="name" required>
+                    <input type="text" id="name" name="name" required>
                     <spam class="barra"></spam>
                     <label for="name">Nombre de Usuario</label>
                 </div>
 
                 <div class="grupo">
-                    <input type="email" name="email" id="name" required>
+                    <input type="email" name="email" id="email" required>
                     <spam class="barra"></spam>
                     <label for="email">Email</label>
                 </div>
