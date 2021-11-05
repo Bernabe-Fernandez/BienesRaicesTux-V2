@@ -4,11 +4,12 @@
     require 'includes/config/database.php';
     $db = conectarDB();
 
-    $_POST['option'] = "";
-
     $errores = [];
+
     //autenticar el usuario
-    if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["option"] == '1') {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST['option'] == '1') {
+        var_dump($_POST['option']);
+        exit;
         //agregamos filtro para validar email
         $email = mysqli_real_escape_string($db, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
         $password = mysqli_real_escape_string($db, $_POST['password']);
@@ -59,7 +60,9 @@
                 $errores[] = "El Correo Electronico no es Correcto";
             }
         }
-    } elseif (($_SERVER["REQUEST_METHOD"] === "POST" && $_POST["option"] == '2')) {
+    } elseif (($_SERVER["REQUEST_METHOD"] === "POST" && $_POST['option'] == '2')) {
+        var_dump($_POST['option']);
+        exit;
         //agregamos filtro para validar email
         $email = mysqli_real_escape_string($db, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
         $password = mysqli_real_escape_string($db, $_POST['password']);
@@ -109,8 +112,6 @@
                 $errores[] = "El Correo Electronico no es Correcto";
             }
         }
-    } else {
-        $errores[] = "Seleccione si es Comprador o Vendedor";
     }
     incluirTemplate('header');
     ?>
@@ -152,7 +153,7 @@
                 </div>
                 <div class="type-user">
                     <label for="vendedor">Vendedor</label>
-                    <input type="radio" id="vendedor" name="option" value="1">
+                    <input type="radio" id="vendedor" name="option" value="1" checked>
                     <label for="comprador">Comprador</label>
                     <input type="radio" id="comprador" name="option" value="2">
                 </div>
