@@ -211,7 +211,7 @@
                 <fieldset>
                     <legend>Informacion Propietario</legend>
                     <label for="nameUser">Nombre de Usuario:</label>
-                    <input type="text" id="nameUser" name="nameUser" placeholder="Nombre de Usuario" value="<?php echo $nameUser; ?>">
+                    <input type="text" id="nameUser" name="nameUser" placeholder="Nombre de Usuario" value="<?php echo $nameUser; ?>" require>
                 </fieldset>
 
                 <!-- botton amarillo -->
