@@ -2,7 +2,7 @@
     require 'includes/funciones.php';
     $auth = estaAutenticado();
     if (!$auth) {
-        header('Location: index.php?resultado=4');
+        header('Location: index.php?resultado=7');
     }
 
     //Conexion a la base de datos

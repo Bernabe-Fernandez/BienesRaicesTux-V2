@@ -16,7 +16,7 @@ incluirTemplate('header');
         <h2>
             Casas y Departamentos en Venta
         </h2>
-        <div class="catalago-home-container">
+        <div class="catalago-container">
             <!-- tarjeta de la casa publicada -->
             <?php
             include 'includes/templates/anunciosventas.php';

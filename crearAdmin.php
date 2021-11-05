@@ -43,7 +43,7 @@
 
             if ($resultado) {
                 //REDICCIONAR AL USUARIO
-                header('Location: index.php');
+                header('Location: index.php?resultado=8');
             }
         }
     }

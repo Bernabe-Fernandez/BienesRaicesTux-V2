@@ -16,6 +16,12 @@
             <p class="alerta error">Debe Iniciar Sesion o Crear una Cuenta de Cliente</p>
         <?php elseif (intval($resultado) === 5) : ?>
             <p class="alerta error">No es Administrador</p>
+        <?php elseif (intval($resultado) === 6) : ?>
+            <p class="alerta exito">Enviado Con Exito</p>
+        <?php elseif (intval($resultado) === 7) : ?>
+            <p class="alerta error">No es un Vendedor</p>
+        <?php elseif (intval($resultado) === 8) : ?>
+            <p class="alerta error">Administrador Creado</p>
         <?php endif; ?>
         <h1 class="nosotros-title">Más Sobre Nosotros</h1>
         <div class="nosotros-container">

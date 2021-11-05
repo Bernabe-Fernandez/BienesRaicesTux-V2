@@ -204,7 +204,7 @@
                 <label for="imagen">Imagen:</label>
                 <!-- accept, condiciona que solo se suban imagenes -->
                 <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen">
-                <img src="../imagenes/<?php echo $imagenPropiedad; ?>" alt="imagen propiedad" class="imagen">
+                <img src="imagenes/<?php echo $imagenPropiedad; ?>" alt="imagen propiedad" class="imagen">
 
                 <label for="direccion">Dirección:</label>
                 <input type="text" id="direccion" name="direccion" placeholder="Dirección de la Propiedad" value="<?php echo $direccion; ?>">

@@ -1,9 +1,5 @@
 <?php
 require 'includes/funciones.php';
-$auth = estaAutenticado();
-if (!$auth) {
-    header('Location: index.php?resultado=4');
-}
 
 //Conexion a la base de datos
 require 'includes/config/database.php';

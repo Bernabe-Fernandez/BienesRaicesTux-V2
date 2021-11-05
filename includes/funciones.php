@@ -10,12 +10,13 @@ function estaAutenticado(): bool
 {
     //manejar sesiones para ingresar
     session_start();
-    $auth = $_SESSION['login'];
+    $auth = $_SESSION['login_vendedor'];
     if ($auth) {
         return true;
     }
     return false;
 }
+
 
 function esAdmin(): bool
 {

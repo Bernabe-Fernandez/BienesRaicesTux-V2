@@ -127,9 +127,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["option"] == '1') {
     if (!$RFC) {
         $errores[] = 'Debes añadir tu RFC';
     }
-    if (!$telefonoMovil) {
-        $errores[] = 'Debes añadir un numero celular';
-    }
     if (!$direccion) {
         $errores[] = 'Debes añadir la direccion';
     }

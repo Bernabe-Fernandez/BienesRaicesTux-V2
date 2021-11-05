@@ -21,7 +21,7 @@ while ($propiedad = mysqli_fetch_assoc($resultado)) :
                 <?php echo $propiedad['descripcion']; ?>
             </p>
             <p class="precio-anuncio">
-                $<?php echo $propiedad['precio']; ?>
+                $<?php echo $propiedad['precio']; ?>.00
             </p>
             <p class="title">
                 <span>Tipo Inmueble:</span> <?php echo $propiedad['tipoInmueble']; ?>

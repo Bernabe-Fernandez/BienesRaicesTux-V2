@@ -9,45 +9,48 @@
         //agregamos filtro para validar email
         $email = mysqli_real_escape_string($db, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
         $password = mysqli_real_escape_string($db, $_POST['password']);
+        $username = mysqli_real_escape_string($db, $_POST['name']);
 
         if (!$email) {
             $errores[] = "El Email es obligatorio o  no es valido";
         }
-
         if (!$password) {
             $errores[] = "El Password es obligatorio";
+        }
+        if (!$username) {
+            $errores[] = "El Nombre de usuario es obligatorio";
         }
 
         if (empty($errores)) {
 
             //revisar si el usuario existe
-            $query = "SELECT correoElectronico, contrasena FROM administradores WHERE correoElectronico = '${email}'";
+            $query = "SELECT nombre, correoElectronico, contrasena FROM administradores WHERE correoElectronico = '${email}'";
             $resultado = mysqli_query($db, $query);
-            // var_dump($resultado->num_rows);
-
-
-
             //comprobacion para usuarios
             if ($resultado->num_rows) {
                 //revisar si el password es correcto
                 $usuario = mysqli_fetch_assoc($resultado);
                 //verificar si el usuario es correcto
-                $auth = password_verify($password, $usuario['contrasena']);
-                if ($auth) {
-                    //el usuario ha sido autenticado
-                    session_start();
+                if ($usuario['nombre'] == $username) {
+                    $auth = password_verify($password, $usuario['contrasena']);
+                    if ($auth) {
+                        //el usuario ha sido autenticado
+                        session_start();
 
-                    //llenar el arreglo de la sesion
-                    $_SESSION['usuario'] = $usuario['correoElectronico'];
-                    $_SESSION['admin'] = true;
+                        //llenar el arreglo de la sesion
+                        $_SESSION['usuario'] = $usuario['correoElectronico'];
+                        $_SESSION['admin'] = true;
 
-                    //regresar al index
-                    header('Location: admin.php');
+                        //regresar al index
+                        header('Location: admin.php');
+                    } else {
+                        $errores[] = "Contraseña Incorrecta";
+                    }
                 } else {
-                    $errores[] = "Contraseña Incorrecta";
+                    $errores[] = "El nombre de usuario no coincide";
                 }
             } else {
-                $errores[] = "El Usuario no existe";
+                $errores[] = "El correo electronico no coincide";
             }
         }
     }
@@ -66,7 +69,7 @@
         <form action="" method="POST" class="form">
             <div class="forma">
                 <div class="grupo">
-                    <input type="text" id="name" required>
+                    <input type="text" id="name" name="name" required>
                     <spam class="barra"></spam>
                     <label for="name">Nombre de Usuario</label>
                 </div>

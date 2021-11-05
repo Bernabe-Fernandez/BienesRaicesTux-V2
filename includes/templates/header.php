@@ -122,7 +122,7 @@ $admin = $_SESSION['admin'] ?? false;
                 </li>
                 <?php if ($admin) : ?>
                     <li class="menu--item">
-                        <a class="menu--link" href="admin.php">Administacón</a>
+                        <a class="menu--link" href="admin.php">Administración</a>
                     </li>
                 <?php endif; ?>
                 <?php if ($auth || $admin) : ?>
