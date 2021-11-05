@@ -8,8 +8,6 @@
 
     //autenticar el usuario
     if ($_SERVER["REQUEST_METHOD"] === "POST" && $_POST['option'] == '1') {
-        var_dump($_POST['option']);
-        exit;
         //agregamos filtro para validar email
         $email = mysqli_real_escape_string($db, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
         $password = mysqli_real_escape_string($db, $_POST['password']);
@@ -61,8 +59,6 @@
             }
         }
     } elseif (($_SERVER["REQUEST_METHOD"] === "POST" && $_POST['option'] == '2')) {
-        var_dump($_POST['option']);
-        exit;
         //agregamos filtro para validar email
         $email = mysqli_real_escape_string($db, filter_var($_POST['email'], FILTER_VALIDATE_EMAIL));
         $password = mysqli_real_escape_string($db, $_POST['password']);
@@ -122,6 +118,9 @@
                 <?php echo $error; ?>
             </div>
         <?php endforeach; ?>
+        <?php if (intval($resultado) === 1) : ?>
+            <p class="alerta exito">Usuario Creado Correctamente</p>
+        <?php endif; ?>
         <h1>Inicio de Sesión Cliente</h1>
         <form action="" method="POST" class="form">
             <div class="forma">
