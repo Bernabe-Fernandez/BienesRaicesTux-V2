@@ -1,5 +1,5 @@
 <?php
 //declaramos constantes
 
-define('TEMPLATES_URL', __DIR__ . '\templates');
+define('TEMPLATES_URL', 'includes/templates/');
 define('FUNCIONES_URL', 'funciones.php');

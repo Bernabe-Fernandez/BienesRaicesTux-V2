@@ -3,7 +3,7 @@ require 'app.php';
 
 function incluirTemplate(string $nombre)
 {
-    include TEMPLATES_URL . '\\' . "${nombre}.php";
+    include TEMPLATES_URL . "${nombre}.php";
 }
 
 function estaAutenticado(): bool
