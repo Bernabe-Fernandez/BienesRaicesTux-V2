@@ -44,7 +44,7 @@
                         //llenar el arreglo de la sesion
                         $_SESSION['usuario'] = $usuario['correoElectronico'];
                         $_SESSION['Idusuario'] = $usuario['IdVendedores'];
-                        $_SESSION['login_vendedor'] = true;
+                        $_SESSION['login'] = true;
 
                         //regresar al index
                         header('Location: index.php');
@@ -94,7 +94,7 @@
                         //llenar el arreglo de la sesion
                         $_SESSION['usuario'] = $usuario['correoElectronico'];
                         $_SESSION['Idusuario'] = $usuario['idCompradores'];
-                        $_SESSION['login_comprador'] = true;
+                        $_SESSION['login'] = true;
 
                         //regresar al index
                         header('Location: index.php');

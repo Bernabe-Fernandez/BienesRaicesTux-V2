@@ -10,7 +10,7 @@ function estaAutenticado(): bool
 {
     //manejar sesiones para ingresar
     session_start();
-    $auth = $_SESSION['login_vendedor'];
+    $auth = $_SESSION['login'];
     if ($auth) {
         return true;
     }
