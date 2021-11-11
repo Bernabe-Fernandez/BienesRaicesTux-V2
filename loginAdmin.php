@@ -42,7 +42,8 @@
                         $_SESSION['admin'] = true;
 
                         //regresar al index
-                        header('Location: admin.php');
+                        //header('Location: admin.php');
+                        echo "<script>location.href='admin.php';</script>";
                     } else {
                         $errores[] = "Contraseña Incorrecta";
                     }

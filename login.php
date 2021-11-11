@@ -47,7 +47,8 @@
                         $_SESSION['login'] = true;
 
                         //regresar al index
-                        header('Location: index.php');
+                        //header('Location: login.php');
+                        echo "<script>location.href='index.php';</script>";
                     } else {
                         $errores[] = "Contraseña Incorrecta";
                     }
@@ -97,7 +98,8 @@
                         $_SESSION['login'] = true;
 
                         //regresar al index
-                        header('Location: index.php');
+                        //header('Location: index.php');
+                        echo "<script>location.href='index.php';</script>";
                     } else {
                         $errores[] = "Contraseña Incorrecta";
                     }

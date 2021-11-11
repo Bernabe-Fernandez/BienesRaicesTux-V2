@@ -3,6 +3,7 @@ require 'includes/funciones.php';
 $user = estaAutenticado();
 if (!$user) {
     header('Location: index.php?resultado=4');
+    //echo "<script>location.href=index.php?resultado=4';</script>";
 }
 
 $resultado = $_GET['resultado'] ?? null;
