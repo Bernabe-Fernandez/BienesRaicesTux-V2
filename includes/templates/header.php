@@ -3,9 +3,6 @@
 $auth = $_SESSION['login'] ?? false;
 $admin = $_SESSION['admin'] ?? false;
 
-var_dump($admin);
-var_dump($auth);
-
 ?>
 
 <!DOCTYPE html>
